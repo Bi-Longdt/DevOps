@@ -4,10 +4,7 @@ import os
 from werkzeug.utils import secure_filename
 from random import randint
 
-
 app = Flask(__name__, template_folder='templates')
-
-
 
 # Hàm để đọc dữ liệu từ sheet "categorty" trong tệp Excel và trả về dưới dạng danh sách
 def read_categortys():
@@ -274,8 +271,6 @@ def add_categorty():
     # success_message = f"Meo mei đã thêm '{name}' ❤️"
     # return name
     # return redirect('/categorty')
-
-
 
 @app.route('/edit_categorty', methods=['POST'])
 def edit_categorty():
