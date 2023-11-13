@@ -30,8 +30,6 @@ jobs:
         pip install -r requirements.txt
         pytest tests/
     
-
-
     - name: Run Code Coverage
       run: |
         pip install -r requirements.txt
