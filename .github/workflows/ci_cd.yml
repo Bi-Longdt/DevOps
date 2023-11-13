@@ -16,30 +16,27 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: 3.8
+        python-version: 3.11.4
 
     - name: Install Dependencies
       run: |
-        pip install flake8 pytest pytest-cov -r requirements.txt
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
 
     - name: Check Python Syntax
       run: flake8
 
     - name: Run Unit Tests
       run: |
-        pip install -r requirements.txt
         pytest tests/
-    
+
     - name: Run Code Coverage
       run: |
-        pip install -r requirements.txt
         pytest --cov=app tests/
 
     - name: Run Integration Tests
       run: |
-        pip install -r requirements.txt
         pytest tests/integration/
-
 
     - name: Pre-Deployment Checks
       run: |
