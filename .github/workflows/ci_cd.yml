@@ -1,0 +1,66 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+
+    - name: Install Dependencies
+      run: |
+        pip install flake8 pytest pytest-cov -r requirements.txt
+
+    - name: Check Python Syntax
+      run: flake8
+
+    - name: Run Unit Tests
+      run: |
+        pip install -r requirements.txt
+        pytest tests/
+    
+
+
+    - name: Run Code Coverage
+      run: |
+        pip install -r requirements.txt
+        pytest --cov=app tests/
+
+    - name: Run Integration Tests
+      run: |
+        pip install -r requirements.txt
+        pytest tests/integration/
+
+
+    - name: Pre-Deployment Checks
+      run: |
+        # Your pre-deployment checks go here
+
+    - name: Deploy to Production
+      run: |
+        # Your deployment script or commands go here
+
+    - name: Post-Deployment Checks
+      run: |
+        # Your post-deployment checks go here
+
+  deploy:
+    runs-on: ubuntu-latest
+
+    needs: build
+
+    steps:
+    - name: Deploy to Production
+      run: |
+        # Your deployment script or commands go here
