@@ -57,4 +57,4 @@ def test_read_products():
     # os.rename(temp_data_file, 'data/data_test.xlsx')
 
 
-# Tương tự, bạn có thể viết các bài kiểm thử cho các hàm khác như write_categortys, write_products, add_product, edit_product, delete_product, và các hàm khác.
+# Tương tự,viết các bài kiểm thử cho các hàm khác như write_categortys, write_products, add_product, edit_product, delete_product, và các hàm khác.
