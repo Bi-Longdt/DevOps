@@ -35,14 +35,6 @@ jobs:
     - name: Run Integration Tests
       run: |
         pytest tests/integration_test.py
-    
-    - name: Security Tests
-      run: |
-        pip install bandit
-        bandit -r app/
-    - name: Database Tests
-      run: |
-        pytest tests/database_test.py
 
     - name: Linting
       run: |
@@ -56,17 +48,26 @@ jobs:
         black --check . --exclude "app\.py"
       continue-on-error: true
         
-    - name: Pre-Deployment Checks
-      run: |
-        # Your pre-deployment checks go here
+  security:
+    runs-on: ubuntu-latest
 
-    - name: Deploy to Production
-      run: |
-        # Your deployment script or commands go here
+    needs: build
 
-    - name: Post-Deployment Checks
+    steps:
+    - name: Security Tests
       run: |
-        # Your post-deployment checks go here
+        pip install bandit
+        bandit -r app/
+
+  database:
+    runs-on: ubuntu-latest
+
+    needs: build
+
+    steps:
+    - name: Database Tests
+      run: |
+        pytest tests/database_test.py
 
   deploy:
     runs-on: ubuntu-latest
