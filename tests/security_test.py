@@ -3,6 +3,8 @@ from flask import Flask
 from flask.testing import FlaskClient
 from werkzeug.security import generate_password_hash, check_password_hash
 from app import app, read_categortys, read_products
+from bs4 import BeautifulSoup
+
 
 @pytest.fixture
 def client():
