@@ -45,12 +45,6 @@ jobs:
         pip install flake8
         flake8 .
       continue-on-error: true
-
-    - name: Code Style Checks
-      run: |
-        pip install black
-        black --check . --exclude "app\.py"
-      continue-on-error: true
     
     - name: Code Formatting
       run: |
