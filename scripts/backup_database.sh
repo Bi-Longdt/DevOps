@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Database information
-DB_FILE="D:/VKU/Year3/HK1/Linux/DevOps/data/data.xlsx"
-BACKUP_DIR="D:/VKU/Year3/HK1/Linux/DevOps/backup/directory"
+DB_FILE="Desktop/Linux/DevOps/data/data.xlsx"
+BACKUP_DIR="Desktop/Linux/DevOps/backup/directory"
 
 # Timestamp for backup file
 TIMESTAMP=$(date +%Y%m%d%H%M%S)
