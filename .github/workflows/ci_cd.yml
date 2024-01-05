@@ -23,9 +23,10 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
+
     - name: Run Unit Tests
       run: |
-        pytest tests/
+        pytest tests/unit_test.py
 
     - name: Run Code Coverage
       run: |
@@ -33,17 +34,26 @@ jobs:
 
     - name: Run Integration Tests
       run: |
-        pytest tests/integration/
-    - name: Check PR title
+        pytest tests/integration_test.py
+    
+    - name: Security Tests
       run: |
-        title="${{ github.event.pull_request.title }}"
-        if [[ $title =~ ^octocat ]]; then
-        echo "PR title starts with 'octocat'"
-        exit 0
-        else
-        echo "PR title did not start with 'octocat'"
-        exit 1
-        fi
+        pip install bandit
+        bandit -r app/
+    - name: Database Tests
+      run: |
+        pytest tests/database_test.py
+
+    - name: Linting
+      run: |
+        pip install flake8
+        flake8 .
+
+    - name: Code Style Checks
+      run: |
+        pip install black
+        black --check .
+        
     - name: Pre-Deployment Checks
       run: |
         # Your pre-deployment checks go here
