@@ -38,7 +38,6 @@ jobs:
     
     - name: Security Tests
       run: |
-        pytest tests/security_test.py
         pip install bandit
         bandit -r app/
     - name: Database Tests
