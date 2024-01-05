@@ -23,8 +23,6 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-
-
     - name: Run Unit Tests
       run: |
         pytest tests/
@@ -36,70 +34,27 @@ jobs:
     - name: Run Integration Tests
       run: |
         pytest tests/integration/
-
+    - name: Check PR title
+      run: |
+        title="${{ github.event.pull_request.title }}"
+        if [[ $title =~ ^octocat ]]; then
+        echo "PR title starts with 'octocat'"
+        exit 0
+        else
+        echo "PR title did not start with 'octocat'"
+        exit 1
+        fi
     - name: Pre-Deployment Checks
       run: |
-        # Kiểm tra xem tất cả các bước trước đó đã chạy thành công
-        if [ ${{ job.status }} != "success" ]; then
-          echo "Previous steps failed, aborting deployment."
-          exit 1
-        fi
-
-        # Kiểm tra xem môi trường triển khai là đúng
-        if [ "$ENVIRONMENT" != "production" ]; then
-          echo "Deployment is allowed only to production environment."
-          exit 1
-        fi
-
-        # Kiểm tra xem có thay đổi cần triển khai không
-        if git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep -qv 'path/to/your/deployment/files'; then
-          echo "No changes in deployment files, skipping deployment."
-          exit 0
-        fi
-
-        # Thực hiện các kiểm tra bảo mật trước khi triển khai
-        # Ví dụ: quét mã nguồn, kiểm tra lỗ hổng bảo mật, ...
-
-        # Chuẩn bị các thông tin cần thiết cho quy trình triển khai
-        export DEPLOYMENT_TOKEN="your_deployment_token"
-
-        echo "Pre-Deployment checks completed successfully."
-
+        # Your pre-deployment checks go here
 
     - name: Deploy to Production
       run: |
-        # Kiểm tra xem tất cả các bước trước đó đã chạy thành công
-        if [ ${{ job.status }} != "success" ]; then
-          echo "Previous steps failed, aborting deployment."
-          exit 1
-        fi
-    
-        # Chạy lệnh để triển khai ứng dụng, ví dụ: sử dụng scp để sao chép file lên máy chủ
-        scp -r ./your_app user@production-server:/path/to/deploy
-    
-        # Truy cập máy chủ và thực hiện các bước triển khai cụ thể
-        ssh user@production-server 'cd /path/to/deploy && ./deploy_script.sh'
-    
-        # Kiểm tra trạng thái triển khai và thông báo kết quả
-        if [ $? -eq 0 ]; then
-          echo "Deployment to production succeeded."
-        else
-          echo "Deployment to production failed."
-          exit 1
-        fi
+        # Your deployment script or commands go here
 
     - name: Post-Deployment Checks
       run: |
-        # Kiểm tra xem triển khai đã thành công không
-        if [ ${{ job.status }} != "success" ]; then
-          echo "Deployment failed, skipping post-deployment checks."
-          exit 1
-        fi
-    
-        # Thực hiện các kiểm tra sau khi triển khai, ví dụ: kiểm tra sẵn sàng, kiểm tra liên kết, ...
-    
-        # Gửi thông báo hoặc cập nhật trạng thái nếu mọi thứ đều ổn
-        echo "Post-Deployment checks completed successfully."
+        # Your post-deployment checks go here
 
   deploy:
     runs-on: ubuntu-latest
