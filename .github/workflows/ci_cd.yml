@@ -56,20 +56,6 @@ jobs:
       run: |
         pip install black
         black . --exclude "app\.py"
-    - name: Deploy to Production
-      run: |
-        # Backup database
-        scripts/backup_database.sh
-
-        # Deploy the application
-        scripts/deploy.sh
-
-        # Restart the application server
-        systemctl restart my-app
-
-        # Monitor and log deployment status
-        scripts/monitor_deployment.sh
-      continue-on-error: false
         
   security:
     runs-on: ubuntu-latest
