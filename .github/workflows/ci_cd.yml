@@ -77,14 +77,14 @@ jobs:
     - name: Deploy to Production
       run: |
         # Backup database
-        ./scripts/backup_database.sh
+        scripts/backup_database.sh
 
         # Deploy the application
-        ./scripts/deploy.sh
+        scripts/deploy.sh
 
         # Restart the application server
         systemctl restart my-app
 
         # Monitor and log deployment status
-        ./scripts/monitor_deployment.sh
+        scripts/monitor_deployment.sh
       continue-on-error: false
