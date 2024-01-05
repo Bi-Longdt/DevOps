@@ -2,7 +2,9 @@
 
 # Database information
 DB_FILE="/data/data.xlsx"
-BACKUP_DIR="D:\VKU\Year3\HK1\Linux\DevOps\backup\directory"
+BACKUP_DIR="/mnt/D/VKU/Year3/HK1/Linux/DevOps/backup/directory"
+
+
 
 # Timestamp for backup file
 TIMESTAMP=$(date +%Y%m%d%H%M%S)
