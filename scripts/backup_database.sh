@@ -2,7 +2,7 @@
 
 # Database information
 DB_FILE="/data/data.xlsx"
-BACKUP_DIR="/mnt/D/VKU/Year3/HK1/Linux/DevOps/backup/directory"
+BACKUP_DIR="/backup/directory"
 
 
 
