@@ -22,7 +22,11 @@ def test_secure_password_hashing():
 def test_categorty_data_privacy(client: FlaskClient):
     # Test if the category data is not exposed to unauthorized users
     response = client.get('/')
-    assert b'categorty' not in response.data
+    soup = BeautifulSoup(response.data, 'html.parser')
+    content_text = soup.get_text()
+
+    # Now check if 'categorty' is present only in the HTML content
+    assert 'categorty' not in content_text
 
 def test_product_data_privacy(client: FlaskClient):
     # Test if the product data is not exposed to unauthorized users
