@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Assuming your Flask app is in a directory named 'app'
-APP_DIR="D/VKU/Year3/HK1/Linux/DevOps"
+APP_DIR="D:/VKU/Year3/HK1/Linux/DevOps"
 
 
 # Update the code from your version control system (e.g., git)
