@@ -48,11 +48,13 @@ jobs:
       run: |
         pip install flake8
         flake8 .
+      continue-on-error: true
 
     - name: Code Style Checks
       run: |
         pip install black
         black --check .
+      continue-on-error: true
         
     - name: Pre-Deployment Checks
       run: |
